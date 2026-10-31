@@ -46,4 +46,4 @@ To write a LaTeX table, call `table.saveAsPDF(path="./", filename="measurements.
 
 ## Project status
 
-This is a compact, exploratory utility rather than a packaged release. Some helpers are incomplete or need repair: the `model` class is a placeholder, `CSV_to_PDF` relies on a commented-out import, and `setSpace` refers to attributes that `Table` does not define. Review results and uncertainty assumptions before using them in formal analysis.
+This is a compact, exploratory utility rather than a packaged release. Review results and uncertainty assumptions before using them in formal analysis.

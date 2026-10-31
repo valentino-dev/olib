@@ -1,6 +1,5 @@
 #from pathvalidate import sanitize_filename
 import os
-#import pdfkit
 import math
 import numpy as np
 import pandas as pd
@@ -62,18 +61,6 @@ def roundToError(x, x_err, digits=2):
         return np.round(x, digits-error_digits-1), np.round(x_err, digits-error_digits-1)
     else:
         return x, x_err
-
-
-class model:
-    def __init__(self) -> None:
-        pass
-
-    def fit(self, X, Y):
-        pass
-
-    def predict(self, x) -> np.ndarray:
-        pass
-
 
 class Table:
 
@@ -175,15 +162,6 @@ class Table:
     def getScaling(self):
         return 10**(np.floor(np.log10(np.abs(self.x).max()))//3*3), 10**(np.floor(np.log10(np.abs(self.y).max()))//3*3)
 
-def CSV_to_PDF(pandas_table, output_file_name):
-    html_table = pandas_table.to_html()
-
-    options = {'page-size': 'Letter', 'margin-top': '0mm',
-               'margin-right': '0mm', 'margin-bottom': '0mm', 'margin-left': '0mm'}
-
-    pdfkit.from_string(html_table, output_file_name, options=options)
-
-
 def setSpace(axis, tables, border=0.1, resolution=0.1, path=None):
     if type(tables) == list:
         temp_X = np.array([])
@@ -202,8 +180,8 @@ def setSpace(axis, tables, border=0.1, resolution=0.1, path=None):
         raise ValueError('Wrong type of tables: only list of olib.Table or olib.Table. Got '+f'{type(tables)}.')
 
         
-    axis.set_xlabel(table.x_label_scaled)
-    axis.set_ylabel(table.y_label_scaled)
+    axis.set_xlabel(table.xlabel + ' / ' + table.x_unit_scaled)
+    axis.set_ylabel(table.ylabel + ' / ' + table.y_unit_scaled)
     axis.set_title(table.title)
     
     X = table.x/table.x_scaling
